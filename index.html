@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的互动小说</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        #storyText { 
+            margin-bottom: 20px; 
+            min-height: 200px; 
+            border: 1px solid #ddd; 
+            padding: 25px; 
+            border-radius: 8px; 
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        #choices button { 
+            display: block; 
+            margin: 10px 0; 
+            padding: 15px; 
+            width: 100%; 
+            text-align: left; 
+            background: #3498db; 
+            color: white;
+            border: none; 
+            cursor: pointer; 
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        #choices button:hover { 
+            background: #2980b9; 
+        }
+        #errorDisplay {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #c62828;
+            display: none;
+        }
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>我的互动小说</h1>
+    <div id="storyText" class="loading">正在加载故事...</div>
+    <div id="choices"></div>
+    <div id="errorDisplay"></div>
+    
+    <!-- 添加状态栏元素 -->
+    <div class="status-bar">
+        <div id="versionInfo">inkjs版本: 加载中...</div>
+        <div id="storyStatus">状态: 初始化</div>
+    </div>
+
+    <!-- 使用CDN确保inkjs加载 -->
+    <script src="https://cdn.jsdelivr.net/npm/inkjs@2.1.0/dist/ink.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
