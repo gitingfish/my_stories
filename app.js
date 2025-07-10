@@ -1,4 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ===== 版本兼容性检查 =====
+function checkInkjsVersion() {
+    if (typeof inkjs === 'undefined') {
+        document.getElementById('errorDisplay').innerHTML = 
+            '错误：inkjs引擎未加载！请检查网络连接或CDN';
+        document.getElementById('errorDisplay').style.display = 'block';
+        document.getElementById('versionInfo').textContent = 'inkjs版本: 未加载';
+        return false;
+    }
+    
+    // 显示版本信息
+    const version = inkjs.version || '未知';
+    document.getElementById('versionInfo').textContent = `inkjs版本: ${version}`;
+    
+    // 检查最低版本要求 (3.0.0)
+    const majorVersion = parseFloat(version.split('.')[0]);
+    if (majorVersion < 3) {
+        document.getElementById('errorDisplay').innerHTML = 
+            `错误：引擎版本过低（当前${version}，需要≥3.0）`;
+        document.getElementById('errorDisplay').style.display = 'block';
+        document.getElementById('storyStatus').textContent = '状态: 不兼容';
+        return false;
+    }
+    
+    return true;
+}
+
+// 在初始化故事前调用检查
+if (!checkInkjsVersion()) {
+    // 如果检查失败，停止后续执行
+    document.getElementById('storyText').textContent = '引擎不兼容，无法加载故事';
+} else {
+    // 原有的故事初始化代码
+    document.getElementById('storyStatus').textContent = '状态: 加载中...';
+    // 这里放你原有的 fetch 和 new Story() 代码
+}document.addEventListener('DOMContentLoaded', () => {
     const storyTextElement = document.getElementById('storyText');
     const choicesElement = document.getElementById('choices');
     const errorDisplay = document.getElementById('errorDisplay');
